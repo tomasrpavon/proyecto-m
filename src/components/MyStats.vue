@@ -26,21 +26,28 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { /*mapGetters,*/ mapActions } from "vuex";
 
 export default {
   name: "MyStats",
+  data() {
+    return {
+      statsData: [],
+    };
+  },
   computed: {
-    ...mapGetters(["statsData"]),
     isLoading() {
       return this.statsData.length === 0;
     },
   },
   methods: {
     ...mapActions(["fetchStats"]),
+    async loadStats(){
+      this.statsData = await this.fetchStats();
+    }
   },
   created() {
-    this.fetchStats(); // Llama a la acción al crear el componente
+    this.loadStats();
   },
 };
 </script>

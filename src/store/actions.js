@@ -11,12 +11,14 @@ export default {
       console.error("Error al obtener la presentación:", error);
     }
   },
-  async fetchStats({ commit }) {
+  async fetchStats(/*{ commit }*/) {
     try {
       const response = await axios.get(
         "https://pil-2023-land-default-rtdb.firebaseio.com/personajes/Lionel/historico.json"
       );
-      commit("setStatsData", response.data);
+      console.log("🚀 ~ file: actions.js:19 ~ fetchStats ~ response:", response)
+      //commit("setStatsData", response.data);
+      return response?.data;
     } catch (error) {
       console.error("Error al obtener las estadísticas:", error);
     }

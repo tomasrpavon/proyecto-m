@@ -64,7 +64,7 @@
           </div>
           <div>
             <v-row>
-              <v-col cols="2">
+              <v-col cols="3">
                 <v-btn
                   style="float: right"
                   type="submit"
@@ -73,7 +73,7 @@
                   >Enviar</v-btn
                 >
               </v-col>
-              <v-col cols="10">
+              <v-col cols="9">
                 <v-btn style="float: right" color="error" @click="resetForm">
                   <v-snackbar
                     class="alerta"
