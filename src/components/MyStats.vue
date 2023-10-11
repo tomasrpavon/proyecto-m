@@ -33,17 +33,20 @@ export default {
   data() {
     return {
       statsData: [],
+      isLoading: false,
     };
   },
-  computed: {
-    isLoading() {
-      return this.statsData.length === 0;
-    },
-  },
+
   methods: {
     ...mapActions(["fetchStats"]),
     async loadStats(){
+      try {
+        this.isLoading = true
       this.statsData = await this.fetchStats();
+      } catch (error){
+        console.error("Error al cargar las Stats", error);
+      }
+      this.isLoading = false
     }
   },
   created() {

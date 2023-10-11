@@ -25,21 +25,32 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapActions } from "vuex";
 
 export default {
   name: "MyPresentation",
-  computed: {
-    ...mapGetters(["presentationData"]),
-    isLoading() {
-      return this.presentationData === null;
-    },
+  data() {
+    return {
+      presentationData: "",
+      isLoading: false,
+    };
   },
+
   methods: {
     ...mapActions(["fetchPresentation"]),
+
+    async cargarPresentation() {
+      try {
+        this.isLoading = true;
+        this.presentationData = await this.fetchPresentation();
+      } catch (error) {
+        console.error("Error al cargar la Presentación", error);
+      }
+      this.isLoading = false;
+    },
   },
   mounted() {
-    this.fetchPresentation(); // Llama a la acción al cargar el componente
+    this.cargarPresentation();
   },
 };
 </script>
