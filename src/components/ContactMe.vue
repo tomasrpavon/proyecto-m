@@ -3,7 +3,7 @@
     <v-card class="contact">
       <v-card-title> Formulario de Contacto </v-card-title>
       <v-card-text>
-        <v-form ref="form" @submit.prevent="submitForm" v-model="formValid">
+        <v-form ref="form" @submit.prevent="submitFormMethod" v-model="formValid">
           <v-text-field
             v-model.trim="fullName"
             label="Nombre completo"
@@ -165,7 +165,7 @@ export default {
 
       return whatsappLink;
     },
-    async submitForm() {
+    async submitFormMethod() {
       // Crear un objeto con los datos del formulario
       const formData = {
         fullName: this.fullName,
@@ -177,21 +177,22 @@ export default {
 
       try {
         // Llamar a la acción Vuex para enviar el formulario usando this.$store.dispatch
-        await this.$store.dispatch("submitForm", formData);
+        const response = await this.submitForm(formData);
+        if (response.status === 200) {
+          // Abre el enlace de WhatsApp si es necesario
+          const whatsappLink = this.generateWhatsAppLink();
+          window.open(whatsappLink, "_blank");
 
-        // Abre el enlace de WhatsApp si es necesario
-        const whatsappLink = this.generateWhatsAppLink();
-        window.open(whatsappLink, "_blank");
-
-        // Muestra el Snackbar de éxito
-        this.openSnackBar(true);
+          // Muestra el Snackbar de éxito
+          this.openSnackBar(true);
+        }
       } catch (error) {
         // Manejar errores de envío del formulario aquí
         console.error("Error al enviar el formulario:", error);
         this.openSnackBar(false);
       }
       // Reiniciar el formulario
-      this.resetForm();
+      // this.resetForm();
     },
     resetForm() {
       this.fullName =

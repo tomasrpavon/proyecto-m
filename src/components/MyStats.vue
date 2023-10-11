@@ -30,27 +30,26 @@ import { /*mapGetters,*/ mapActions } from "vuex";
 
 export default {
   name: "MyStats",
+  created() {
+    this.loadStats();
+  },
   data() {
     return {
       statsData: [],
       isLoading: false,
     };
   },
-
   methods: {
     ...mapActions(["fetchStats"]),
-    async loadStats(){
+    async loadStats() {
       try {
-        this.isLoading = true
-      this.statsData = await this.fetchStats();
-      } catch (error){
+        this.isLoading = true;
+        this.statsData = await this.fetchStats();
+      } catch (error) {
         console.error("Error al cargar las Stats", error);
       }
-      this.isLoading = false
-    }
-  },
-  created() {
-    this.loadStats();
+      this.isLoading = false;
+    },
   },
 };
 </script>

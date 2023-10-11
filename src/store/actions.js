@@ -25,16 +25,13 @@ export default {
       console.error("Error al obtener las estadísticas:", error);
     }
   },
-  async submitForm(formData) {
+  async submitForm(context, request) {
     try {
       const response = await axios.post(
-        "https://macena-2f6af-default-rtdb.firebaseio.com/contacto.json",
-        formData
+        "https://pil-2023-land-default-rtdb.firebaseio.com/personajes/Lionel/contacto.json",
+        request
       );
-
-      if (response.status === 200) {
-        console.log("Formulario enviado con éxito");
-      }
+      return response;
     } catch (error) {
       console.error("Error al enviar el formulario:", error);
     }
