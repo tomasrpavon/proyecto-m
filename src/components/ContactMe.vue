@@ -3,7 +3,11 @@
     <v-card class="contact">
       <v-card-title> Formulario de Contacto </v-card-title>
       <v-card-text>
-        <v-form ref="form" @submit.prevent="submitFormMethod" v-model="formValid">
+        <v-form
+          ref="form"
+          @submit.prevent="submitFormMethod"
+          v-model="formValid"
+        >
           <v-text-field
             v-model.trim="fullName"
             label="Nombre completo"
@@ -138,7 +142,7 @@ export default {
     this.getCelular();
   },
   methods: {
-    ...mapActions(["submitForm"]), // Mapea la acción desde Vuex
+    ...mapActions(["submitForm"]),
     openSnackBar(exito) {
       if (exito) {
         this.textSnackBar = "Formulario enviado con éxito!";

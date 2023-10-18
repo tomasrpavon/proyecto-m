@@ -5,6 +5,7 @@ import MyStats from "./components/MyStats.vue";
 import ContactMe from "./components/ContactMe.vue";
 import NotFound from "./components/NotFound.vue";
 import HomePage from "./components/HomePage.vue";
+import MyTitles from "./components/MyTitles.vue";
 import store from "./store/index.js"; // Importa el módulo Vuex con el nuevo nombre
 
 Vue.use(VueRouter);
@@ -29,7 +30,7 @@ const router = new VueRouter({
       path: "/presentation",
       component: MyPresentation,
       beforeEnter: (to, from, next) => {
-        // Muestra el botón en otras rutas if () {}
+        // Muestra el botón en otras rutas 
         store.commit("setShowHomeButton", true);
         next();
       },
@@ -38,7 +39,6 @@ const router = new VueRouter({
       path: "/stats",
       component: MyStats,
       beforeEnter: (to, from, next) => {
-        // Muestra el botón en otras rutas
         store.commit("setShowHomeButton", true);
         next();
       },
@@ -47,7 +47,14 @@ const router = new VueRouter({
       path: "/contact",
       component: ContactMe,
       beforeEnter: (to, from, next) => {
-        // Muestra el botón en otras rutas
+        store.commit("setShowHomeButton", true);
+        next();
+      },
+    },
+    {
+      path: "/titulos",
+      component: MyTitles,
+      beforeEnter: (to, from, next) => {
         store.commit("setShowHomeButton", true);
         next();
       },
@@ -56,13 +63,11 @@ const router = new VueRouter({
       path: "/:notFound(.*)",
       component: NotFound,
       beforeEnter: (to, from, next) => {
-        // Muestra el botón en otras rutas
         store.commit("setShowHomeButton", true);
         next();
       },
     },
   ],
-  // Resto del código...
 });
 
 export default router;

@@ -7,7 +7,7 @@ import getters from "./getters";
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
-  state(){
+  state() {
     return {
       showHomeButton: true,
       presentationData: null,
@@ -19,4 +19,4 @@ const store = new Vuex.Store({
   getters: getters,
 });
 
-export default store
+export default store;
